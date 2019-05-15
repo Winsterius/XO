@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace XO.Model
 {
-    enum Figure
+    public enum Figure
     {
-        X, O
+        X, O, _
 
     }
     
