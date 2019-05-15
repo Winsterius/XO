@@ -14,7 +14,7 @@ namespace XO
         static int x = 0;
         static void Main(string[] args)
         {
-            Field field = new Field(3);
+            Field field = new Field();
             MoveController mc = new MoveController();
 
             field.ShowField();
@@ -24,6 +24,9 @@ namespace XO
             {
                 mc.AskForMove(Figure.X);
                 x++;
+                //Console.Clear();
+                foreach(Figure f in field.GetFigure()) Console.WriteLine(f);
+                field.ShowField();
             }
 
             Console.ReadKey();

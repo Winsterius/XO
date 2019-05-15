@@ -8,8 +8,7 @@ namespace XO.Model
 {
     public enum Figure
     {
-        X, O, _
-
+        _, O, X
     }
     
 }
