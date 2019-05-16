@@ -9,41 +9,41 @@ namespace XO.Model
     public class Field
     {
         private const int MIN_COORDINATE = 0;
-        private static int MAX_COORDINATE = 3;
+        private static int MAX_COORDINATE;
 
-        private Figure[,] figures = new Figure[MAX_COORDINATE, MAX_COORDINATE]; 
-
+        private static Figure[,] figures;
+        
         public void setFigureOnField(Figure figure, int x, int y)
         {
-            this.figures[x, y] = figure;
-            Console.WriteLine(figures[x,y]);
-            Console.ReadKey();
+            figures[x, y] = figure;
+
         }
 
         public void ShowField()
         {
-          
-            Console.WriteLine(" {0,1} | {1,1} | {2,1} ", GetFigure()[0, 0], GetFigure()[0, 1], GetFigure()[0, 2]);
+            Console.WriteLine(" {0,1} | {1,1} | {2,1} ", figures[0, 0], figures[0, 1], figures[0, 2]);
             Console.WriteLine("-----------");
-            Console.WriteLine(" {0,1} | {1,1} | {2,1} ", GetFigure()[1, 0], GetFigure()[1, 1], GetFigure()[1, 2]);
+            Console.WriteLine(" {0,1} | {1,1} | {2,1} ", figures[1, 0], figures[1, 1], figures[1, 2]);
             Console.WriteLine("-----------");
-            Console.WriteLine(" {0,1} | {1,1} | {2,1} ", GetFigure()[2, 0], GetFigure()[2, 1], GetFigure()[2, 2]);
+            Console.WriteLine(" {0,1} | {1,1} | {2,1} ", figures[2, 0], figures[2, 1], figures[2, 2]);
         }
-        public Figure[,] GetFigure()
+        
+        public int getArrLength()
         {
-            return this.figures;
+            return figures.GetLength(0);
         }
 
-        //public Field(int x)
-        //{
-        //    //MAX_COORDINATE = x;
-        //    //figures = new Figure[MAX_COORDINATE, MAX_COORDINATE];
+        public Field() { }
+        public Field(int x)
+        {
+            MAX_COORDINATE = x;
+            figures = new Figure[MAX_COORDINATE, MAX_COORDINATE];
 
-        //    for (int i = 0; i < figures.GetLength(0); i++)
-        //    {
-        //        for (int j = 0; j < figures.GetLength(1); j++)
-        //            figures[i, j] = Figure._;
-        //    }
-        //}
+            for (int i = 0; i < figures.GetLength(0); i++)
+            {
+                for (int j = 0; j < figures.GetLength(1); j++)
+                    figures[i, j] = Figure._;
+            }
+        }
     }
 }

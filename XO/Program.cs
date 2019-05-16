@@ -14,21 +14,19 @@ namespace XO
         static int x = 0;
         static void Main(string[] args)
         {
-            Field field = new Field();
+            Game game = new Game({p1,p2},);
+            Field field = new Field(3);
             MoveController mc = new MoveController();
+            CurrentMoveController cmc = new CurrentMoveController();
 
-            field.ShowField();
-            
-
-            while(x != 9)
+            while (true)
             {
-                mc.AskForMove(Figure.X);
-                x++;
-                //Console.Clear();
-                foreach(Figure f in field.GetFigure()) Console.WriteLine(f);
                 field.ShowField();
-            }
+                mc.AskForMove(cmc.CheckCurrentMove());
 
+                Console.Clear();
+                
+            }
             Console.ReadKey();
         }
     }

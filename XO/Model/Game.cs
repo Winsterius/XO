@@ -9,13 +9,13 @@ namespace XO.Model
     class Game
     {
         private Player[] players;
-        private Field field;
+        private Figure figure;
         private string name;
 
-        Game(Player[] players, Field field, string name)
+        Game(Player[] players, Figure figure, string name)
         {
             this.players = players;
-            this.field = field;
+            this.figure = figure;
             this.name = name;
         }
         public Player[] GetPlayers()

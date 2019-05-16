@@ -15,14 +15,18 @@ namespace XO.Controllers
         Field field = new Field();
         public void AskForMove(Figure figure)
         {
+
             Console.WriteLine("Take a move");
-            while (!int.TryParse(Console.ReadLine(), out x)) Console.WriteLine("Incorrect move");
-            while (!int.TryParse(Console.ReadLine(), out y)) Console.WriteLine("Incorrect move");
 
-            field.setFigureOnField(figure, x, y);
-            
+            while (!int.TryParse(Console.ReadLine(), out x) || !CheckCoordinate(x)) Console.WriteLine("Incorrect move");
+            while (!int.TryParse(Console.ReadLine(), out y) || !CheckCoordinate(y)) Console.WriteLine("Incorrect move");
+ 
+            field.setFigureOnField(figure, x, y);         
         }
-        void CheckCoordinate() { }
-
+        bool CheckCoordinate(int i)
+        {
+            if (i < 0 || i >= field.getArrLength()) return false;            
+            else return true;
+        }
     }
 }

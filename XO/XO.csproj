@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CurrentMoveController.cs" />
     <Compile Include="Controllers\MoveController.cs" />
     <Compile Include="Model\Field.cs" />
     <Compile Include="Model\Figure.cs" />
