@@ -6,32 +6,22 @@ using System.Threading.Tasks;
 
 namespace XO.Model
 {
-    class Game
+    public class Game
     {
-        private Player[] players;
-        private Figure figure;
-        private string name;
+        private static Player[] players;
 
-        Game(Player[] players, Figure figure, string name)
+        public Game() { }
+        public Game(Player player1, Player player2)
         {
-            this.players = players;
-            this.figure = figure;
-            this.name = name;
-        }
-        public Player[] GetPlayers()
-        {
-            return players;
-        }
-        public Field GetField()
-        {
-            return field;
-        }
-        public string GetName()
-        {
-            return name;
-        }
+            players = new Player[] { player1, player2 };
 
-
+        }
+        public string GetNamePlayer(Figure figure)
+        {
+            if (figure.Equals(Figure.X)) return players[0].GetName();
+            if (figure.Equals(Figure.O)) return players[1].GetName();
+            else return "I am this idiot who had written this code";
+        }
 
     }
 }

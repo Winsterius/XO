@@ -6,24 +6,20 @@ using System.Threading.Tasks;
 
 namespace XO.Model
 {
-    class Player
+    public class Player
     {
         private string name;
         private Figure figure;
 
-        Player(Figure figure, string name)
+        public Player(Figure f, string n)
         {
-            this.name = name;
-            this.figure = figure;
+            name = n;
+            figure = f;
         }
 
         public string GetName()
         {
             return name;
-        }
-        public Figure GetFigure()
-        {
-            return figure;
         }
     }
 }
