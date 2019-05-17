@@ -9,6 +9,7 @@ namespace XO.Controllers
         static int countO = 0;
         
         Game game = new Game();
+
         public Figure CheckCurrentMove()
         {
             if (countO == countX)

@@ -33,6 +33,8 @@ namespace XO.Model
             return figures.GetLength(0);
         }
 
+
+        public Figure[,] GetFiguresArray() { return figures; }
         public Field() { }
         public Field(int x)
         {
