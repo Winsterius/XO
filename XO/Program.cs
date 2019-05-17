@@ -11,7 +11,8 @@ namespace XO
 {
     class Program
     {
-        static int x = 0;
+
+        static int count;
         static void Main(string[] args)
         {
             Console.WriteLine("Please enter the name of first player");
@@ -31,7 +32,14 @@ namespace XO
                 mc.AskForMove(cmc.CheckCurrentMove());
                 wc.CheckWinner(field.GetFiguresArray());
                 Console.Clear();
-                
+                count++;
+                if (count == 9)
+                {
+                    Console.WriteLine("Nobody wins");
+                    Console.ReadKey();
+                    return;
+
+                }
             }
             field.ShowField();
             Console.WriteLine("The winner is {0}", game.GetNamePlayer(WinnerCheckKontroller.winnerFigure));

@@ -11,13 +11,14 @@ namespace XO.Controllers
         public static Figure winnerFigure;
         public static bool finishGame = false;
 
+
         public Figure CheckWinner(Figure[,] figs) {
 
             CheckHorisontals();
             CheckVerticals();
             CheckDiagonals();
             figures = figs;
-            return Figure.X;
+            return winnerFigure;
         }
         public WinnerCheckKontroller()
         {
@@ -34,7 +35,7 @@ namespace XO.Controllers
         {
             int i = 0;
             int j = 0;
-            while (j != 2)
+            while (j  < 3)
             {
                 if (figures[i, j] == figures[i + 1, j] && figures[i + 1, j] == figures[i + 2, j] && figures[i, j] != Figure._)
                 {
@@ -48,9 +49,9 @@ namespace XO.Controllers
         {
             int i = 0;
             int j = 0;
-            while (i != 2)
+            while (i < 3)
             {
-                if (figures[i, j] == figures[i, j + 1] && figures[i, j + 1] == figures[i, j + 1] && figures[i, j] != Figure._)
+                if (figures[i, j] == figures[i, j + 1] && figures[i, j + 1] == figures[i, j + 2] && figures[i, j] != Figure._)
                 {
                     winnerFigure = figures[i, j];
                     finishGame = true;

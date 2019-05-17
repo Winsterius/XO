@@ -11,6 +11,7 @@ namespace XO.Controllers
     {
         private int x;
         private int y;
+        private int input;
         
 
         Field field = new Field();
@@ -18,12 +19,59 @@ namespace XO.Controllers
         {
 
             Console.WriteLine("Take a move");
-            do
+            while (!int.TryParse(Console.ReadLine(), out input)) Console.WriteLine("Incorrect input");
+            ConvertNumberToCoordinats(input);
+            while (CheckEmtyField(field.GetFiguresArray(), x, y))
             {
-                while (!int.TryParse(Console.ReadLine(), out x) || !CheckCoordinate(x)) Console.WriteLine("Incorrect move");
-                while (!int.TryParse(Console.ReadLine(), out y) || !CheckCoordinate(y)) Console.WriteLine("Incorrect move");
-            }while (CheckEmtyField(field.GetFiguresArray(), this.x, this.y));
+                while (!CheckCoordinate(x)) Console.WriteLine("Incorrect move");
+            } 
             field.setFigureOnField(figure, x, y);         
+        }
+        public void ConvertNumberToCoordinats(int input)
+        {
+            switch (input) {
+
+                case 1:
+                    x = 2;
+                    y = 0;
+                    break;
+                case 2:
+                    x = 2;
+                    y = 1;
+                    break;
+                case 3:
+                    x = 2;
+                    y = 2;
+                    break;
+                case 4:
+                    x = 1;
+                    y = 0;
+                    break;
+                case 5:
+                    x = 1;
+                    y = 1;
+                    break;
+                case 6:
+                    x = 1;
+                    y = 2;
+                    break;
+                case 7:
+                    x = 0;
+                    y = 0;
+                    break;
+                case 8:
+                    x = 0;
+                    y = 1;
+                    break;
+                case 9:
+                    x = 0;
+                    y = 2;
+                    break;
+                default:
+                    x = -1;
+                    y = -1;
+                    break;
+            }
         }
         bool CheckCoordinate(int i)
         {
