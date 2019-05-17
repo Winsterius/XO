@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using XO.View;
 using XO.Model;
 using XO.Controllers;
 
@@ -11,24 +8,25 @@ namespace XO
 {
     class Program
     {
-
+        static Player p1;
+        static Player p2;
         static int count;
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Please enter the name of first player");
-            Player p1 = new Player(Figure.X, Console.ReadLine());
-            Console.WriteLine("Please enter the name of second player");
-            Player p2 = new Player(Figure.O, Console.ReadLine());
+
+            askingForPlayers();
 
             Game game = new Game(p1, p2);
             Field field = new Field(3);
             MoveController mc = new MoveController();
             CurrentMoveController cmc = new CurrentMoveController();
             WinnerCheckKontroller wc = new WinnerCheckKontroller();
+            ConsoleView cv = new ConsoleView();
 
             while (!WinnerCheckKontroller.finishGame)
             {
-                field.ShowField();
+                cv.ShowField();
                 mc.AskForMove(cmc.CheckCurrentMove());
                 wc.CheckWinner(field.GetFiguresArray());
                 Console.Clear();
@@ -38,12 +36,18 @@ namespace XO
                     Console.WriteLine("Nobody wins");
                     Console.ReadKey();
                     return;
-
                 }
             }
-            field.ShowField();
+            cv.ShowField();
             Console.WriteLine("The winner is {0}", game.GetNamePlayer(WinnerCheckKontroller.winnerFigure));
             Console.ReadKey();
+        }
+        static void askingForPlayers()
+        {
+            Console.WriteLine("Please enter the name of first player");
+            p1 = new Player(Figure.X, Console.ReadLine());
+            Console.WriteLine("Please enter the name of second player");
+            p2 = new Player(Figure.O, Console.ReadLine());
         }
     }
 }

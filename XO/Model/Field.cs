@@ -19,20 +19,10 @@ namespace XO.Model
 
         }
 
-        public void ShowField()
-        {
-            Console.WriteLine(" {0,1} | {1,1} | {2,1} ", figures[0, 0], figures[0, 1], figures[0, 2]);
-            Console.WriteLine("-----------");
-            Console.WriteLine(" {0,1} | {1,1} | {2,1} ", figures[1, 0], figures[1, 1], figures[1, 2]);
-            Console.WriteLine("-----------");
-            Console.WriteLine(" {0,1} | {1,1} | {2,1} ", figures[2, 0], figures[2, 1], figures[2, 2]);
-        }
         
-        public int getArrLength()
-        {
-            return figures.GetLength(0);
-        }
 
+        public int getArrLength() => figures.GetLength(0);
+        public Figure[,] GetFigures() => figures; 
 
         public Figure[,] GetFiguresArray() { return figures; }
         public Field() { }
