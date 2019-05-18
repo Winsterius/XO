@@ -8,7 +8,9 @@ namespace XO.Model
 {
     public class Game
     {
-        private static Player[] players;
+        public static Player[] players;
+        
+        
 
         public Game() { }
         public Game(Player player1, Player player2)

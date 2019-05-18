@@ -12,20 +12,24 @@ namespace XO.Controllers
         private int x;
         private int y;
         private int input;
+        private bool correctEmty = true;
         
 
         Field field = new Field();
         public void AskForMove(Figure figure)
         {
-
-            Console.WriteLine("Take a move");
-            while (!int.TryParse(Console.ReadLine(), out input)) Console.WriteLine("Incorrect input");
-            ConvertNumberToCoordinats(input);
-            while (CheckEmtyField(field.GetFiguresArray(), x, y))
+            do
             {
-                while (!CheckCoordinate(x)) Console.WriteLine("Incorrect move");
-            } 
-            field.setFigureOnField(figure, x, y);         
+                Console.WriteLine("Take a move");
+                while (!int.TryParse(Console.ReadLine(), out input)) ;
+                ConvertNumberToCoordinats(input);
+                while (!CheckEmtyField(field.GetFiguresArray(), x, y, figure))
+                {
+                    if (!correctEmty) break;
+                    while (!CheckCoordinate(x)) Console.WriteLine("Incorrect move");
+                }
+                field.setFigureOnField(figure, x, y);
+            } while (!correctEmty);
         }
         public void ConvertNumberToCoordinats(int input)
         {
@@ -78,10 +82,11 @@ namespace XO.Controllers
             if (i < 0 || i >= field.getArrLength()) return false;            
             else return true;
         }
-        bool CheckEmtyField(Figure[,] figs, int x, int y)
+        bool CheckEmtyField(Figure[,] figs, int x, int y, Figure figure)
         {
-            if (figs[x, y].Equals(Figure._)) return false;
-            else return true;
+            if (figs[x, y].Equals(Figure._)) { correctEmty = true; return true; }
+            //if (figs[x, y].Equals(figure)) return false;
+            else { correctEmty = false; return false; }
         }
     }
 }

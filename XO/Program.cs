@@ -23,6 +23,7 @@ namespace XO
             CurrentMoveController cmc = new CurrentMoveController();
             WinnerCheckKontroller wc = new WinnerCheckKontroller();
             ConsoleView cv = new ConsoleView();
+            ConsoleView2 cv2 = new ConsoleView2();
             Start();
            
             cv.ShowField();
@@ -33,7 +34,7 @@ namespace XO
             {
                 while (!WinnerCheckKontroller.finishGame)
                 {
-                    cv.ShowField();
+                    cv2.ShowField();
                     mc.AskForMove(cmc.CheckCurrentMove());
                     wc.CheckWinner(field.GetFiguresArray());
                     Console.Clear();
@@ -54,6 +55,7 @@ namespace XO
             p1 = new Player(Figure.X, Console.ReadLine());
             Console.WriteLine("Please enter the name of second player");
             p2 = new Player(Figure.O, Console.ReadLine());
+            Console.Clear();
         }
         
     }
