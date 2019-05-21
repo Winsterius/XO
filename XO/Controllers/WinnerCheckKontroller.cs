@@ -50,7 +50,7 @@ namespace XO.Controllers
             int i = 0;
             int j = 0;
             while (i < 3)
-            {
+            {              
                 if (figures[i, j] == figures[i, j + 1] && figures[i, j + 1] == figures[i, j + 2] && figures[i, j] != Figure._)
                 {
                     winnerFigure = figures[i, j];

@@ -35,7 +35,7 @@ namespace XO
                 while (!WinnerCheckKontroller.finishGame)
                 {
                     cv2.ShowField();
-                    mc.AskForMove(cmc.CheckCurrentMove());
+                    mc.AskForMove2(cmc.CheckCurrentMove(field.GetFiguresArray()));
                     wc.CheckWinner(field.GetFiguresArray());
                     Console.Clear();
                     count++;

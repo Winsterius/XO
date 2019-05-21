@@ -6,7 +6,7 @@ namespace XO.View
 {
     class ConsoleView
     {
-        Field field = new Field();
+        private Field field = new Field();
         
         public virtual void ShowField()
         {

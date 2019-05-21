@@ -16,10 +16,6 @@ namespace XO.Model
             name = n;
             figure = f;
         }
-
-        public string GetName()
-        {
-            return name;
-        }
+        public string GetName() => name;
     }
 }

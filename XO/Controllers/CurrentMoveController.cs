@@ -5,26 +5,31 @@ namespace XO.Controllers
 {
     public class CurrentMoveController
     {
-        static int countX = 0;
-        static int countO = 0;
         
         Game game = new Game();
 
-        public Figure CheckCurrentMove()
+        private void print(string str) { Console.WriteLine("{0}, it is your turn", str); }
+
+        public Figure CheckCurrentMove(Figure[,] figs)
         {
-            if (countO == countX)
+            int countX = 0;
+            int countO = 0;
+
+            foreach (Figure fig in figs)
             {
-                Console.WriteLine("{0}, it is your turn", game.GetNamePlayer(Figure.X));
-                countX++;
+                if (fig.Equals(Figure.O)) countO++;
+                if (fig.Equals(Figure.X)) countX++;
+            }
+            if (countX == countO)
+            {
+                print(game.GetNamePlayer(Figure.X));
                 return Figure.X;
             }
             else
             {
-                Console.WriteLine("{0}, it is your turn", game.GetNamePlayer(Figure.O));
-                countO++;
+                print(game.GetNamePlayer(Figure.O));
                 return Figure.O;
             }
         }
-
     }
 }

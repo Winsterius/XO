@@ -10,8 +10,6 @@ namespace XO.Model
     {
         public static Player[] players;
         
-        
-
         public Game() { }
         public Game(Player player1, Player player2)
         {
