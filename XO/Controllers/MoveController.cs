@@ -12,19 +12,16 @@ namespace XO.Controllers
         private int x;
         private int y;
         private int input;
-        private bool correctEmty = true;
-        
+        readonly Field field = new Field();
 
-        Field field = new Field();
-
-        public void AskForMove2(Figure figure)
+        public void AskForMove(Figure figure)
         {
             Console.WriteLine("Take a move");
-            if (!int.TryParse(Console.ReadLine(), out input) || input < 0 || input > 9) AskForMove2(figure);
+            if (!int.TryParse(Console.ReadLine(), out input) || input < 0 || input > 9) AskForMove(figure);
             else
             {
                 ConvertNumberToCoordinats(input);
-                while (CheckEmtyField(field.GetFiguresArray(), x, y, figure)) AskForMove2(figure);
+                while (CheckEmtyField(field.GetFiguresArray(), x, y, figure)) AskForMove(figure);
                 field.setFigureOnField(figure, x, y);
             }
         }
@@ -75,11 +72,6 @@ namespace XO.Controllers
             }
         }
 
-        bool CheckCoordinate(int i)
-        {
-            if (i < 0 || i >= 9) return true;            
-            else return false;
-        }
         bool CheckEmtyField(Figure[,] figs, int x, int y, Figure figure)
         {
             if (figs[x, y].Equals(Figure._)) return false; 

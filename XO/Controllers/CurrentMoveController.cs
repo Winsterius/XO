@@ -5,15 +5,14 @@ namespace XO.Controllers
 {
     public class CurrentMoveController
     {
-        
-        Game game = new Game();
-
-        private void print(string str) { Console.WriteLine("{0}, it is your turn", str); }
+        private Game game;
+        private void print(string str) => Console.WriteLine("{0}, it is your turn", str); 
 
         public Figure CheckCurrentMove(Figure[,] figs)
         {
             int countX = 0;
             int countO = 0;
+            game = new Game();
 
             foreach (Figure fig in figs)
             {

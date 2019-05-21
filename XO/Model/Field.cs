@@ -15,10 +15,7 @@ namespace XO.Model
         {
             figures = new Figure[MAX_COORDINATE, MAX_COORDINATE];
         }
-
-        public int getArrLength() => figures.GetLength(0);
-        public Figure[,] GetFigures() => figures; 
-        public Figure[,] GetFiguresArray() { return figures; }
+        public Figure[,] GetFiguresArray() => figures; 
 
         public void setFigureOnField(Figure figure, int x, int y)
         {

@@ -13,24 +13,13 @@ namespace XO.Controllers
 
 
         public Figure CheckWinner(Figure[,] figs) {
-
+            figures = figs;
             CheckHorisontals();
             CheckVerticals();
             CheckDiagonals();
             figures = figs;
             return winnerFigure;
         }
-        public WinnerCheckKontroller()
-        {
-            figures = new Figure[3, 3];
-
-            for (int i = 0; i < figures.GetLength(0); i++)
-            {
-                for (int j = 0; j < figures.GetLength(1); j++)
-                    figures[i, j] = Figure._;
-            }
-        }
-
         void CheckHorisontals()
         {
             int i = 0;
@@ -68,17 +57,17 @@ namespace XO.Controllers
                 winnerFigure = figures[i, j];
                 finishGame = true;
             }
-            if(checkSameFigure(figures[i + 2, j], figures[i + 1, j + 1], figures[i + 2, j]))
+            if(checkSameFigure(figures[i + 2, j], figures[i + 1, j + 1], figures[i, j + 2]))
             {
-                winnerFigure = figures[i, j];
+                winnerFigure = figures[i + 2, j];
                 finishGame = true;
             }
         }
-        private bool checkSameFigure(Figure ob1, Figure ob2, Figure ob3)
+        private bool checkSameFigure(object ob1, object ob2, object ob3)
         {
             if (ob1.Equals(ob2) && ob1.Equals(ob3) && !ob1.Equals(Figure._)) return true;
             else return false;
         }
-
+        
     }
 }
