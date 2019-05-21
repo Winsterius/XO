@@ -36,8 +36,8 @@ namespace XO.Controllers
             int i = 0;
             int j = 0;
             while (j  < 3)
-            {
-                if (figures[i, j] == figures[i + 1, j] && figures[i + 1, j] == figures[i + 2, j] && figures[i, j] != Figure._)
+            {             
+                if (checkSameFigure(figures[i, j], figures[i + 1, j], figures[i + 2, j]))
                 {
                     winnerFigure = figures[i, j];
                     finishGame = true;
@@ -50,8 +50,8 @@ namespace XO.Controllers
             int i = 0;
             int j = 0;
             while (i < 3)
-            {              
-                if (figures[i, j] == figures[i, j + 1] && figures[i, j + 1] == figures[i, j + 2] && figures[i, j] != Figure._)
+            {   
+                if(checkSameFigure(figures[i, j], figures[i, j + 1], figures[i, j + 2]))                
                 {
                     winnerFigure = figures[i, j];
                     finishGame = true;
@@ -63,16 +63,22 @@ namespace XO.Controllers
         {
             int i = 0;
             int j = 0;
-            if (figures[i, j] == figures[i + 1, j + 1] && figures[i + 1, j + 1] == figures[i + 2, j + 2] && figures[i, j] != Figure._)
+            if(checkSameFigure(figures[i, j], figures[i + 1, j + 1], figures[i + 2, j + 2]))
             {
                 winnerFigure = figures[i, j];
                 finishGame = true;
             }
-            if (figures[i + 2, j] == figures[i + 1, j + 1] && figures[i + 1, j + 1] == figures[i, j + 2] && figures[i + 2, j] != Figure._)
+            if(checkSameFigure(figures[i + 2, j], figures[i + 1, j + 1], figures[i + 2, j]))
             {
                 winnerFigure = figures[i, j];
                 finishGame = true;
             }
         }
+        private bool checkSameFigure(Figure ob1, Figure ob2, Figure ob3)
+        {
+            if (ob1.Equals(ob2) && ob1.Equals(ob3) && !ob1.Equals(Figure._)) return true;
+            else return false;
+        }
+
     }
 }
