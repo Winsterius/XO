@@ -62,6 +62,7 @@
     <Compile Include="Controllers\MoveController.cs" />
     <Compile Include="Controllers\WinnerCheckKontroller.cs" />
     <Compile Include="Model\AI.cs" />
+    <Compile Include="Model\CreateTheGame.cs" />
     <Compile Include="Model\Field.cs" />
     <Compile Include="Model\Figure.cs" />
     <Compile Include="Model\Game.cs" />

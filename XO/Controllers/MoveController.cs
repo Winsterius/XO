@@ -14,7 +14,7 @@ namespace XO.Controllers
         private int input;
         readonly Field field = new Field();
 
-        public void AskForMove(Figure figure)
+        public virtual void AskForMove(Figure figure)
         {
             Console.WriteLine("Take a move");
             if (!int.TryParse(Console.ReadLine(), out input) || input < 0 || input > 9) AskForMove(figure);
@@ -77,6 +77,18 @@ namespace XO.Controllers
             if (figs[x, y].Equals(Figure._)) return false; 
 
             else return true; 
+        }
+    }
+    public class MoveControllerOnePlayer : MoveController
+    {
+        AI ai = new AI();
+        public override void AskForMove(Figure figure)
+        {
+            if (figure.Equals(ai.getAIFigure()))
+            {
+                ai.TakingMove();
+            }
+            else base.AskForMove(figure);
         }
     }
 }

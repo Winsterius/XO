@@ -6,8 +6,11 @@ namespace XO.View
 {
     class ConsoleView
     {
+        public static string figurePlayerInput;
+        private bool finish;
         readonly Field field = new Field();
-        private Game game;
+        Game game;
+
         public virtual void ShowField()
         {
             game = new Game();
@@ -18,28 +21,56 @@ namespace XO.View
             Console.WriteLine(" {0,1} | {1,1} | {2,1} ", field.GetFiguresArray()[2, 0], field.GetFiguresArray()[2, 1], field.GetFiguresArray()[2, 2]);
 
         }
-        public void askingForPlayers()
+        public virtual void askingForPlayers(string str)
         {
-            Console.WriteLine("Please enter the name of first player");
-            Program.p1 = new Player(Figure.X, Console.ReadLine());
-            Console.WriteLine("Please enter the name of second player");
-            Program.p2 = new Player(Figure.O, Console.ReadLine());
-            Console.Clear();
+            Console.WriteLine("Please enter the name of {0} player", str);
+            CreateTheGame.p1 = new Player(Figure._, Console.ReadLine());
+
+        }
+        public void AskingForFigure()
+        {
+            while (!finish) 
+            {
+                Console.WriteLine("Please insert the figure you want play");
+                figurePlayerInput = Console.ReadLine().ToUpper();
+                if ("X".Equals(figurePlayerInput) || "O".Equals(figurePlayerInput)) finish = true;
+            }
         }
         public void showWinner(){
+            game = new Game();
             Console.WriteLine("The winner is {0}", game.GetNamePlayer(WinnerCheckKontroller.winnerFigure));
         }
-
+        public void ShowMenu()
+        {
+            Console.WriteLine("1:   Player vs player");
+            Console.WriteLine("2:   Player vs computer");
+            Console.WriteLine("3:   Exit the game");
+        }
     }
     class ConsoleView2 : ConsoleView
     {
+        public override void askingForPlayers(string str)
+        {
 
+            base.askingForPlayers("first");
+            Console.WriteLine("Please enter the name of {0} player", str);
+            CreateTheGame.p2 = new Player(Figure.O, Console.ReadLine());
+            Console.Clear();
+        }
         public override void ShowField()
         {
             Console.WriteLine("First player: {0}", Game.players[0].GetName());
-            Console.WriteLine("\nSecond player: {0}\n", Game.players[1].GetName());
             base.ShowField();
         }       
+    }
+    class ConsoleViewOnePlayer : ConsoleView
+    {
+        Player player = new Player();
+        public override void ShowField()
+        {
+            Console.WriteLine("First player: {0}", player.GetName()[0]);
+            base.ShowField();
+        }
     }
 }
     

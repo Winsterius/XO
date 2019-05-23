@@ -11,6 +11,7 @@ namespace XO.Model
         private string name;
         private Figure figure;
 
+        public Player() { }
         public Player(Figure f, string n)
         {
             name = n;

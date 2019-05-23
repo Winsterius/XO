@@ -1,4 +1,5 @@
 ﻿using System;
+using XO.View;
 
 
 namespace XO.Model
@@ -7,25 +8,26 @@ namespace XO.Model
     {
         private Figure[,] figures;
         private Figure aIFigure;
-        private Figure playerFigure;
-        private int helpSetFigure;
+        private string playerFigure;
         private int x;
         private int y;
 
         readonly Field field = new Field();
         readonly Random random = new Random();
-        public AI(Figure playerFuigure)
+        public AI() { }
+        public AI(string playerFuigure)
         {
-            if (playerFigure.Equals(Figure.X)) aIFigure = Figure.O;
-            if (playerFigure.Equals(Figure.O)) aIFigure = Figure.X;
+            playerFigure = ConsoleView.figurePlayerInput;
+            if (playerFigure.Equals("X")) aIFigure = Figure.O;
+            if (playerFigure.Equals("O")) aIFigure = Figure.X;
         }
 
         public AI(Figure[,] figures) => this.figures = figures;
-        public void SetFigure(Figure figure) => this.aIFigure = figure; 
+        public void SetFigure(Figure figure) => aIFigure = figure; 
 
         public void TakingMove()
         {
-            helpSetFigure = random.Next(1,3);
+            
             if(GetCountOfFiguresInArray() == 8)
             {
                 getEmtyIndices();
@@ -59,5 +61,7 @@ namespace XO.Model
                 }
             }    
         }
+        public int GetRandomNumber(int i) => random.Next(1, i + 1);
+        public Figure getAIFigure() => aIFigure;
     }
 }
