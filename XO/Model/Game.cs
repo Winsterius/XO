@@ -6,17 +6,17 @@ namespace XO.Model
 {
     public class Game
     {
-        private int count;
+        protected int count;
         public static Player[] players;
 
 
-        readonly ConsoleView cv = new ConsoleView();
-        readonly ConsoleView2 cv2 = new ConsoleView2();
-        readonly MoveController mc = new MoveController();
+        ConsoleView cv = new ConsoleView();
+        ConsoleView2 cv2 = new ConsoleView2();
+        protected MoveController mc = new MoveController();
 
-        readonly CurrentMoveController cmc = new CurrentMoveController();
-        readonly Field field = new Field();
-        readonly WinnerCheckKontroller wc = new WinnerCheckKontroller();
+        protected CurrentMoveController cmc = new CurrentMoveController();
+        protected Field field = new Field();
+        protected WinnerCheckKontroller wc = new WinnerCheckKontroller();
 
         public Game() { }
         public Game(Player player) { players = new Player[] { player }; }
@@ -33,16 +33,15 @@ namespace XO.Model
         }
 
         public virtual void Start()
-        {
-            ConsoleViewOnePlayer cvop = new ConsoleViewOnePlayer();
+        {            
             while (!WinnerCheckKontroller.finishGame)
             {
-                cvop.ShowField();
+                cv2.ShowField();
                 mc.AskForMove(cmc.CheckCurrentMove(field.GetFiguresArray()));
                 wc.CheckWinner(field.GetFiguresArray());
                 Console.Clear();
                 count++;
-                if (count == 9)
+                if (count == 9 && !WinnerCheckKontroller.finishGame)
                 {
                     Console.WriteLine("Nobody wins");
                     Console.ReadKey();
@@ -57,9 +56,28 @@ namespace XO.Model
         public GameOnePlayer(Player p1) { Game game = new Game(p1); }
         public GameOnePlayer() { }
 
+
         public override void Start()
         {
-            base.Start();
+            ConsoleViewOnePlayer cv2 = new ConsoleViewOnePlayer();
+            CurrentMoveController cmc = new CurrentMoveControllerOnePlayer();
+            MoveController mc = new MoveControllerOnePlayer();
+            Field field = new Field();
+            WinnerCheckKontroller wc = new WinnerCheckKontroller();
+            while (!WinnerCheckKontroller.finishGame)
+            {
+                cv2.ShowField();
+                mc.AskForMove(cmc.CheckCurrentMove(field.GetFiguresArray()));
+                wc.CheckWinner(field.GetFiguresArray());
+                Console.Clear();
+                count++;
+                if (count == 9 && !WinnerCheckKontroller.finishGame)
+                {
+                    Console.WriteLine("Nobody wins");
+                    Console.ReadKey();
+                    return;
+                }
+            }
         }
         public override string GetNamePlayer(Figure figure)
         {

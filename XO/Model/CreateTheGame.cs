@@ -14,8 +14,9 @@ namespace XO.Model
 
         public void Menu()
         {
+            int userInput;
             cv.ShowMenu();
-            int.TryParse(Console.ReadLine(), out int userInput);
+            while (!int.TryParse(Console.ReadLine(), out userInput)) Console.WriteLine("wrong input");
             while (!finishGame)
             {
                 switch (userInput)
@@ -31,6 +32,7 @@ namespace XO.Model
                         Menu();
                         break;
                     case 2:
+                        cv = new ConsoleViewOnePlayer();
                         cv.askingForPlayers("first");
                         game = new GameOnePlayer(p1);
                         field = new Field(3);

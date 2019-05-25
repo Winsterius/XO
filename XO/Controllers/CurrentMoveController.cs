@@ -5,10 +5,10 @@ namespace XO.Controllers
 {
     public class CurrentMoveController
     {
-        private Game game;
+        protected Game game;
         private void print(string str) => Console.WriteLine("{0}, it is your turn", str); 
 
-        public Figure CheckCurrentMove(Figure[,] figs)
+        public virtual Figure CheckCurrentMove(Figure[,] figs)
         {
             int countX = 0;
             int countO = 0;
@@ -27,6 +27,29 @@ namespace XO.Controllers
             else
             {
                 print(game.GetNamePlayer(Figure.O));
+                return Figure.O;
+            }
+        }
+    }
+    public class CurrentMoveControllerOnePlayer : CurrentMoveController
+    {
+        public override Figure CheckCurrentMove(Figure[,] figs)
+        {
+            int countX = 0;
+            int countO = 0;
+            game = new GameOnePlayer();
+
+            foreach (Figure fig in figs)
+            {
+                if (fig.Equals(Figure.O)) countO++;
+                if (fig.Equals(Figure.X)) countX++;
+            }
+            if (countX == countO)
+            {
+                return Figure.X;
+            }
+            else
+            {
                 return Figure.O;
             }
         }

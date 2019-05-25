@@ -6,8 +6,8 @@ namespace XO.Model
 {
     class AI
     {
-        private Figure[,] figures;
-        private Figure aIFigure;
+
+        private static Figure aIFigure;
         private string playerFigure;
         private int x;
         private int y;
@@ -22,7 +22,7 @@ namespace XO.Model
             if (playerFigure.Equals("O")) aIFigure = Figure.X;
         }
 
-        public AI(Figure[,] figures) => this.figures = figures;
+
         public void SetFigure(Figure figure) => aIFigure = figure; 
 
         public void TakingMove()
@@ -35,24 +35,24 @@ namespace XO.Model
             }
             if (GetCountOfFiguresInArray() < 3)
             {
-                if (figures[1, 1].Equals(Figure._)) field.setFigureOnField(aIFigure, 1, 1);
+                if (Field.figures[1, 1].Equals(Figure._)) field.setFigureOnField(aIFigure, 1, 1);
             }
-            else if (figures[0, 0].Equals(Figure._)) field.setFigureOnField(aIFigure, 2, 2);
+            if (Field.figures[0, 0].Equals(Figure._)) field.setFigureOnField(aIFigure, 2, 2);
 
         }
         public int GetCountOfFiguresInArray()
         {
             int count = 0;
-            foreach (Figure fig in this.figures) if (fig.Equals(Figure.X) || fig.Equals(Figure.O)) count++;
+            foreach (Figure fig in Field.figures) if (fig.Equals(Figure.X) || fig.Equals(Figure.O)) count++;
             return count;
         }
         public void getEmtyIndices()
         {
-            for(int x = 0; x < figures.Rank; x++)
+            for(int x = 0; x < Field.figures.Rank; x++)
             {
-                for (int y = 0; y < figures.Rank; y++)
+                for (int y = 0; y < Field.figures.Rank; y++)
                 {
-                    if (figures[x, y].Equals(Figure._))
+                    if (Field.figures[x, y].Equals(Figure._))
                     {
                         this.x = x;
                         this.y = y;

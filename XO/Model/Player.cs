@@ -18,5 +18,6 @@ namespace XO.Model
             figure = f;
         }
         public string GetName() => name;
+        
     }
 }

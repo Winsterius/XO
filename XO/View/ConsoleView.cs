@@ -68,8 +68,12 @@ namespace XO.View
         Player player = new Player();
         public override void ShowField()
         {
-            Console.WriteLine("First player: {0}", player.GetName()[0]);
+            Console.WriteLine("First player: {0}", Game.players[0].GetName());
             base.ShowField();
+        }
+        public override void askingForPlayers(string str)
+        {
+            base.askingForPlayers(str);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace XO.Model
 {
     public class Field
     {
-        private static Figure[,] figures;
+        public static Figure[,] figures;
 
         public Field() { }
         public Field(int MAX_COORDINATE)
