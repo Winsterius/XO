@@ -7,10 +7,11 @@ namespace XO.Model
     class AI
     {
 
-        private static Figure aIFigure;
+        private static Figure aIFigure = Figure.X;
         private string playerFigure;
         private int x;
         private int y;
+        private int helper;
 
         readonly Field field = new Field();
         readonly Random random = new Random();
@@ -22,24 +23,67 @@ namespace XO.Model
             if (playerFigure.Equals("O")) aIFigure = Figure.X;
         }
 
-
         public void SetFigure(Figure figure) => aIFigure = figure; 
 
         public void TakingMove()
         {
-            
+            helper = random.Next(1,4);
             if(GetCountOfFiguresInArray() == 8)
             {
                 getEmtyIndices();
                 field.setFigureOnField(aIFigure, this.x, this.y);
             }
-            if (GetCountOfFiguresInArray() < 3)
+            CheckPossiblyWin(Field.figures);            //?? need tests
+            if (GetCountOfFiguresInArray() <= 4 && helper == 1)
             {
                 if (Field.figures[1, 1].Equals(Figure._)) field.setFigureOnField(aIFigure, 1, 1);
             }
-            if (Field.figures[0, 0].Equals(Figure._)) field.setFigureOnField(aIFigure, 2, 2);
+            else if (Field.figures[0, 0].Equals(Figure._)) field.setFigureOnField(aIFigure, 2, 2);
 
         }
+        public void CheckPossiblyWin(Figure[,] figures)
+        {
+            int count = 0;
+            for (int i = 0; i <= figures.Rank; i++)
+			{               
+                for (int j = 0; j <= figures.Rank; j++) if (figures[i, j].Equals(aIFigure)) count++;
+
+                if (count == 2 ) for (int j = 0; j <= figures.Rank; j++) if(Field.figures[i, j].Equals(Figure._)) field.setFigureOnField(aIFigure, i, j);
+                count = 0;
+            }
+            count = 0; 
+            for (int j = 0; j <= figures.Rank; j++)
+			{
+                               
+                for (int i = 0; i <= figures.Rank; i++)  if(figures[i, j].Equals(aIFigure)) count++;
+                if (count == 2 ) for (int i = 0; i <= figures.Rank; i++) if(Field.figures[i, j].Equals(Figure._)) field.setFigureOnField(aIFigure, i, j);
+                count = 0;
+            }
+            count = 0;
+            for (int i = 0, j = 0; i <= figures.Rank; i++, j++)
+			{
+                
+                if(figures[i, j].Equals(aIFigure)) count++;
+                if (count == 2) for ( i = 0; i <= figures.Rank; i++, j++){
+                    j = 0;
+                    if (Field.figures[i, j].Equals(Figure._)) field.setFigureOnField(aIFigure, i, j);
+                        count = 0;
+                }
+                
+            }
+            count = 0;
+            for (int i = 0, j = 2; i <= figures.Rank; i++, j--)
+			{               
+                
+                if(figures[i, j].Equals(aIFigure)) count++;
+                if (count == 2) for (i = 0; i <= figures.Rank; i++, j--) {
+                    j = 0;
+                    if (Field.figures[i, j].Equals(Figure._)) field.setFigureOnField(aIFigure, i, j);
+                        count = 0;
+                }
+			}
+        }
+
         public int GetCountOfFiguresInArray()
         {
             int count = 0;
